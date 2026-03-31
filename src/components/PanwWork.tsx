@@ -1,0 +1,157 @@
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import './styles/PanwWork.css'
+
+gsap.registerPlugin(ScrollTrigger)
+
+type Project = {
+  period: string
+  title: string
+  desc: string
+  tags: string[]
+}
+
+const projects: Project[] = [
+  // FY26 — current
+  {
+    period: 'FY26 · Current',
+    title: 'GitOps Delivery Migration',
+    desc: 'Replaced manual deployment processes with a complete GitOps system: centralized config repository, multi-environment branching strategy, and automated merge request pipelines. Delivers auditable, automated releases across global production environments.',
+    tags: ['ArgoCD', 'GitLab CI/CD', 'Kubernetes', 'Helm', 'GitOps'],
+  },
+  {
+    period: 'FY26 · Current',
+    title: 'GCP New Region Provisioning',
+    desc: 'Provisioned complete cloud infrastructure for a new GCP region from scratch using Terraform — VPC networking, GKE cluster, KMS encryption, Istio service mesh, certificate management, and private image registry. Zero downtime cutover.',
+    tags: ['Terraform', 'GKE', 'Istio', 'GCP', 'KMS', 'cert-manager'],
+  },
+  {
+    period: 'FY26 · Current',
+    title: 'Progressive Ring Deployment Pipeline',
+    desc: 'Designed a 4-ring progressive delivery pipeline with manual approval gates between stages, spanning 7 global regions. Automated rollback triggers and deployment health checks ensure safe, controlled releases to production.',
+    tags: ['ArgoCD', 'GitLab CI/CD', 'Progressive Delivery', 'Multi-region', 'Kubernetes'],
+  },
+  {
+    period: 'FY26 · Current',
+    title: 'Certificate Rotation & Mutual TLS',
+    desc: 'Led a time-sensitive cross-service CA certificate rotation across production services under compliance deadlines. Enforced mutual TLS and JWT-based authentication in Istio to ensure tenant-isolated, authenticated service-to-service communication.',
+    tags: ['PKI', 'mTLS', 'Istio', 'JWT', 'Security', 'Kubernetes'],
+  },
+  {
+    period: 'FY26 · Current',
+    title: 'Log Aggregation & Workload Identity',
+    desc: 'Integrated a centralised log aggregation system using GCP workload identity federation and Pub/Sub for secure, credential-free log routing. Diagnosed and resolved production OIDC authentication failures to unblock the rollout.',
+    tags: ['Loki', 'GCP Pub/Sub', 'Workload Identity', 'OIDC', 'Istio'],
+  },
+  // FY25
+  {
+    period: 'FY25 · 2024–2025',
+    title: 'Observability Platform Migration',
+    desc: 'Led 90%+ decommissioning of a third-party monitoring platform, migrating all dashboards and alerts to an internal Prometheus/Grafana stack. Reduced tool sprawl, cut costs, and significantly improved alert signal-to-noise ratio.',
+    tags: ['Prometheus', 'Grafana', 'Datadog', 'Redis', 'AWS', 'GCP'],
+  },
+  {
+    period: 'FY25 · 2024–2025',
+    title: 'SOC2 & C5 Compliance Leadership',
+    desc: 'Led security compliance audits (SOC2 Type II and C5) across three cloud security products. Ensured all repositories had automated code scanning coverage and maintained a continuous compliance posture across regulated environments.',
+    tags: ['SOC2', 'C5', 'Compliance', 'Security', 'Checkmarx'],
+  },
+  {
+    period: 'FY25 · 2024–2025',
+    title: 'Disaster Recovery Planning & Failover Testing',
+    desc: 'Led a live failover test for a FedRAMP Moderate regulated environment, validating system resilience under real conditions. Designed, tested, and documented a full DR plan with recovery runbooks for production environments.',
+    tags: ['FedRAMP', 'DR Planning', 'AWS', 'GCP', 'Runbooks'],
+  },
+  {
+    period: 'FY25 · 2024–2025',
+    title: 'Cloud Cost Optimisation',
+    desc: 'Built serverless automation to continuously clean up unattached EBS volumes and stale snapshots, reducing unnecessary cloud spend. Conducted a full cost analysis identifying and eliminating idle resources across production infrastructure.',
+    tags: ['Python', 'AWS Lambda', 'EBS', 'Cost Optimisation', 'Terraform'],
+  },
+  {
+    period: 'FY25 · 2024–2025',
+    title: 'Zero-Downtime Database & Broker Upgrades',
+    desc: 'Executed major version upgrades for a distributed Kafka cluster and multiple PostgreSQL databases across production and regulated environments without service disruption. Managed compatibility testing, data migration, and phased rollouts.',
+    tags: ['Kafka', 'PostgreSQL 17', 'Kubernetes', 'Zero-downtime', 'Database'],
+  },
+  // FY24
+  {
+    period: 'FY24 · 2023–2024',
+    title: 'Infrastructure Monitoring Platform',
+    desc: 'Built a Python-based metrics collection system deployed as a Kubernetes application, exposing 25+ operational metrics from 5 data sources via Prometheus. Delivered real-time dashboards covering compute, caching, queuing, and service mesh health.',
+    tags: ['Python', 'Prometheus', 'Grafana', 'Kubernetes', 'Helm', 'AWS'],
+  },
+  {
+    period: 'FY24 · 2023–2024',
+    title: 'IaC & Alert Pipeline Automation',
+    desc: 'Standardized infrastructure deployments using Terraform and Ansible, eliminating manual configuration drift. Connected CI/CD, incident management, and on-call systems end-to-end so that deployment failures route directly to the right on-call engineer.',
+    tags: ['Terraform', 'Ansible', 'GitLab CI/CD', 'PagerDuty', 'Jenkins'],
+  },
+]
+
+const PanwWork = () => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardRefs = useRef<HTMLDivElement[]>([])
+
+  useEffect(() => {
+    gsap.to(cardRefs.current.filter(Boolean), {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.07,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 70%',
+      },
+    })
+  }, [])
+
+  return (
+    <section className="panw-section" id="panw" ref={sectionRef}>
+      <div className="container">
+        <div className="panw-header">
+          <div>
+            <span className="section-label">[ Palo Alto Networks ]</span>
+            <h2 className="section-heading">
+              Work at<br />PANW.
+            </h2>
+          </div>
+          <div className="panw-meta">
+            <span className="panw-role">Staff Software Engineer</span>
+            <span className="panw-team">Prisma SaaS SRE Team · Santa Clara, CA</span>
+            <span className="panw-tenure">Aug 2023 — Present</span>
+          </div>
+        </div>
+        <p className="panw-intro">
+          The Prisma SaaS SRE team owns reliability, observability, and compliance infrastructure
+          for Palo Alto Networks' cloud security products serving enterprise customers globally.
+          As Staff Software Engineer, I own infrastructure automation, monitoring platforms, and
+          security compliance posture across regulated cloud environments.
+        </p>
+
+        <div className="panw-grid">
+          {projects.map((p, i) => (
+            <div
+              key={p.title}
+              className="panw-card"
+              ref={el => { if (el) cardRefs.current[i] = el }}
+            >
+              <span className="panw-period">{p.period}</span>
+              <h3 className="panw-card-title">{p.title}</h3>
+              <p className="panw-card-desc">{p.desc}</p>
+              <div className="panw-tags">
+                {p.tags.map((tag) => (
+                  <span key={tag} className="panw-tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default PanwWork
